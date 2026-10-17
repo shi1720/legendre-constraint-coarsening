@@ -1,0 +1,24 @@
+name: Verify numerical reference implementation
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -v
+      - run: OPENBLAS_NUM_THREADS=1 python run_experiments.py
+      - name: Check numerical identities
+        run: |
+          python - <<'PY'
+          import json
+          s=json.load(open('results/summary.json'))
+          assert s['cases']==2880 and s['dg_cases']==54
+          for k in ('max_injection_residual','max_norm_formula_residual','max_response_residual','max_pythagoras_residual'):
+              assert s[k]<1e-9,(k,s[k])
+          assert s['max_graph_energy_ratio']<=1+1e-10
+          assert s['max_graph_over_reset_error']<=1+1e-10
+          PY

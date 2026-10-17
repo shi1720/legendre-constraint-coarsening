@@ -1,0 +1,17 @@
+{
+  "cases": 2880,
+  "max_injection_residual": 4.2559965956662187e-16,
+  "max_norm_formula_residual": 2.5928530654609773e-16,
+  "max_response_residual": 2.1281001838248378e-16,
+  "max_pythagoras_residual": 7.654217438958758e-16,
+  "max_graph_energy_ratio": 0.9999999999997956,
+  "max_reset_energy_ratio": 1.2307086270118013,
+  "max_graph_over_reset_error": 0.9999999999673788,
+  "python": "3.9.6",
+  "numpy": "1.26.4",
+  "scipy": "1.13.1",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "elapsed_seconds": 11.208941541,
+  "dg_cases": 54,
+  "dg_max_timestep_relative_change": 0.00012158319360601999
+}
